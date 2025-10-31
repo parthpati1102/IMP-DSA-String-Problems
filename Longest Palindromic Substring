@@ -1,0 +1,40 @@
+class Solution {
+public:
+    bool checkPalindrome(string  &s , int start , int end){
+        while(start <= end){
+            if(s[start] != s[end]){
+                return false;
+            }
+
+            start++;
+            end--;
+        }
+
+        return true;
+    }
+
+    string longestPalindrome(string s) {
+        int  n = s.length();
+
+        if (n <= 1) return s;
+        
+        int startPos = 0;
+        int maxLength = 1;
+
+        for(int i = 0 ; i < n ; i++){
+            for(int j = i + maxLength ; j < n ; j++){
+                if(checkPalindrome(s , i , j)){
+                     
+                    if(j - i + 1 > maxLength){
+                        maxLength = j - i + 1;
+                        startPos = i;
+                    } 
+                }
+            }
+        }
+
+        string ans = s.substr(startPos , maxLength);
+
+        return ans;
+    }
+};
